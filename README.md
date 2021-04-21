@@ -41,7 +41,7 @@ This approach consists of creating a self-contained library bundle that is avail
 ### Pros
 
 - Simple to consume.
-- Independent deployments (hosting app and widget).
+- Independent deployments (host app and widget).
 - Consumer does not require a bundler (e.g. `webpack`).
 
 ### Cons
@@ -121,14 +121,14 @@ In this approach, only the desired bits (i.e. modules) are downloaded and loaded
 
 ### Pros
 
-- Independent deployments (hosting app and widget).
+- Independent deployments (host app and widget).
 - Isolated scope.
 - Dependency re-usage (if host app and widget use `react`, then `react` is downloaded and loaded in memory once).
 
 ### Cons
 
 - More complex than the other options.
-- Host and widget require to be bundled using `webpack` 5.
+- Host app and widget require to be bundled using `webpack` 5.
 
 **Note:** This approach can be used to build [micro frontend](https://micro-frontends.org/) architectures.
 
