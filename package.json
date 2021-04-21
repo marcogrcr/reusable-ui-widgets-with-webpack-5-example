@@ -1,0 +1,13 @@
+{
+  "name": "reusable-ui-widgets-with-webpack-5-example",
+  "private": true,
+  "scripts": {
+    "start": "wsrun -p my-widget -c build && wsrun -c start"
+  },
+  "devDependencies": {
+    "wsrun": "^5.2.4"
+  },
+  "workspaces": [
+    "packages/*"
+  ]
+}
