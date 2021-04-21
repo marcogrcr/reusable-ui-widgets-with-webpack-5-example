@@ -38,16 +38,20 @@ This approach consists of creating a self-contained library bundle that is avail
 </script>
 ```
 
-Pros:
+### Pros
 
 - Simple to consume.
 - Independent deployments (hosting app and widget).
 - Consumer does not require a bundler (e.g. `webpack`).
 
-Cons:
+### Cons
 
 - Global namespace pollution.
 - Internal dependencies are duplicated (if host app and widget use `react`, then `react` is downloaded and loaded in memory twice).
+
+### Network requests
+
+![1-umd-script-tag.png](./res/1-umd-script-tag.png)
 
 ## 2. npm
 
@@ -62,14 +66,14 @@ The widget `npm` package is then bundled using `webpack`.
 }
 ```
 
-Pros:
+### Pros
 
 - Simple to consume.
 - Isolated scope.
 - Dependency re-usage (if host app and widget use `react`, then `react` is downloaded and loaded in memory once).
 - Consumer can use any bundler (e.g. `browserify`, `rollup`).
 
-Cons:
+### Cons
 
 - Coupled deployments (a host app deployment is required whenever the widget is updated).
 
@@ -82,6 +86,10 @@ import { render } from "my-widget";
 
 render(document.getElementById("widget-container"));
 ```
+
+### Network requests
+
+![2-1-npm-no-react.png](./res/2-1-npm-no-react.png)
 
 ## 2.2. npm (`react`)
 
@@ -102,18 +110,22 @@ const App = () => (
 render(<App />, document.getElementById("app-container"));
 ```
 
+### Network requests
+
+![2-2-npm-react.png](./res/2-2-npm-react.png)
+
 ## 3. federated modules
 
 This approach consists of publishing and consuming the widget using [webpack 5 federated modules](https://module-federation.github.io/).
 In this approach, only the desired bits (i.e. modules) are downloaded and loaded in memory at runtime.
 
-Pros:
+### Pros
 
 - Independent deployments (hosting app and widget).
 - Isolated scope.
 - Dependency re-usage (if host app and widget use `react`, then `react` is downloaded and loaded in memory once).
 
-Cons:
+### Cons
 
 - More complex than the other options.
 - Host and widget require to be bundled using `webpack` 5.
@@ -129,6 +141,10 @@ import("my_widget_remote").then(({ render }) => {
   render(document.getElementById("widget-container"));
 });
 ```
+
+### Network requests
+
+![3-1-federated-modules-no-react.png](./res/3-1-federated-modules-no-react.png)
 
 ## 3.2. federated modules (`react`)
 
@@ -150,3 +166,7 @@ const App = () => (
 
 render(<App />, document.getElementById("app-container"));
 ```
+
+### Network requests
+
+![3-2-federated-modules-react.png](./res/3-2-federated-modules-react.png)
