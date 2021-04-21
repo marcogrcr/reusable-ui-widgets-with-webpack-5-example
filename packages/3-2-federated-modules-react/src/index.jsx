@@ -1,7 +1,7 @@
 import React, { Fragment, lazy, Suspense } from "react";
 import { render } from "react-dom";
 
-const MyWidget = lazy(() => import("my_widget_remote").then(({ MyWidget }) => ({ default: MyWidget })));
+const MyWidget = lazy(() => import("my_widget_remote"));
 
 const App = () => {
   return (

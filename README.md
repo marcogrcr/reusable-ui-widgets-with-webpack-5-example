@@ -154,9 +154,7 @@ This example shows how the widget can be consumed from a `react` application.
 import React, { lazy, Suspense } from "react";
 import { render } from "react-dom";
 
-const MyWidget = lazy(() =>
-  import("my_widget_remote").then(({ MyWidget }) => ({ default: MyWidget }))
-);
+const MyWidget = lazy(() => import("my_widget_remote"));
 
 const App = () => (
   <Suspense fallback="Loading...">
