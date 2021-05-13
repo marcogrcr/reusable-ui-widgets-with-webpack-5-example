@@ -1,0 +1,9 @@
+{
+  "extends": "@tsconfig/node12/tsconfig.json",
+  "compilerOptions": {
+    "declaration": true,
+    "jsx": "react",
+    "outDir": "tmp-typings"
+  },
+  "include": ["src"]
+}

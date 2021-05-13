@@ -1,6 +1,6 @@
 # Reusable UI widgets with webpack 5 example
 
-This repository shows 3 different approaches to create re-usable UI widgets using [webpack 5](https://webpack.js.org/concepts/).
+This branch of the repository shows 3 different approaches to create re-usable UI widgets using [webpack 5](https://webpack.js.org/concepts/) and [TypeScript](https://www.typescriptlang.org/).
 
 In this pattern, a host app renders a widget (i.e. an independent piece of UI) one or more times in a page. The widget can in turn be re-used in other host apps. An example of a widget can be a "share on social media" button for sharing a page.
 
@@ -33,9 +33,22 @@ This approach consists of creating a self-contained library bundle that is avail
 
 ```html
 <script src="http://localhost:8000/dist/my-widget.js"></script>
-<script>
-  MyWidget.render(document.getElementById("widget-container"));
-</script>
+```
+
+```ts
+import * as MyWidgetType from "my-widget";
+
+declare global {
+  const MyWidget: typeof MyWidgetType;
+
+  interface Window {
+    readonly MyWidget: typeof MyWidgetType;
+  }
+}
+```
+
+```ts
+MyWidget.renderMyWidget(document.getElementById("widget-container"));
 ```
 
 ### Pros
@@ -81,7 +94,7 @@ The widget `npm` package is then bundled using `webpack`.
 
 This example shows how the widget can be consumed without using `react`.
 
-```js
+```ts
 import { render } from "my-widget";
 
 render(document.getElementById("widget-container"));
@@ -95,7 +108,7 @@ render(document.getElementById("widget-container"));
 
 This example shows how the widget can be consumed from a `react` application.
 
-```js
+```ts
 import React from "react";
 import { render } from "react-dom";
 import { MyWidget } from "my-widget";
@@ -136,8 +149,8 @@ In this approach, only the desired bits (i.e. modules) are downloaded and loaded
 
 This example shows how the widget can be consumed without using `react`.
 
-```js
-import("my_widget_remote").then(({ render }) => {
+```ts
+import("my-widget/my-widget").then(({ render }) => {
   render(document.getElementById("widget-container"));
 });
 ```
@@ -150,11 +163,11 @@ import("my_widget_remote").then(({ render }) => {
 
 This example shows how the widget can be consumed from a `react` application.
 
-```js
+```ts
 import React, { lazy, Suspense } from "react";
 import { render } from "react-dom";
 
-const MyWidget = lazy(() => import("my_widget_remote"));
+const MyWidget = lazy(() => import("my-widget/my-widget"));
 
 const App = () => (
   <Suspense fallback="Loading...">

@@ -6,19 +6,14 @@ const commonConfig = {
   module: {
     rules: [
       {
-        test: /\.m?jsx?$/,
+        test: /\.m?[jt]sx?$/,
         exclude: /node_modules/,
-        use: {
-          loader: "babel-loader",
-          options: {
-            presets: [["@babel/preset-env", { targets: "defaults" }]],
-          },
-        },
+        use: { loader: "babel-loader" },
       },
     ],
   },
   resolve: {
-    extensions: [".js", ".jsx", ".json", ".wasm"],
+    extensions: [".js", ".jsx", ".json", ".ts", ".tsx", ".wasm"],
   },
 };
 
@@ -47,7 +42,8 @@ module.exports = [
         name: "my_widget_remote",
         filename: "my-widget-remote.js",
         exposes: {
-          ".": "./src/index",
+          "./hello-widget": "./src/hello-widget",
+          "./my-widget": "./src/my-widget"
         },
         shared: ["react", "react-dom"],
       }),

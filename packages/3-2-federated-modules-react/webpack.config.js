@@ -2,12 +2,11 @@ const path = require("path");
 const ModuleFederationPlugin = require("webpack/lib/container/ModuleFederationPlugin");
 
 module.exports = {
-  entry: "./src/index.jsx",
   mode: "production",
   module: {
     rules: [
       {
-        test: /\.m?jsx?$/,
+        test: /\.m?[jt]sx?$/,
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",
@@ -20,14 +19,14 @@ module.exports = {
   },
   output: {
     library: {
-      type: "umd"
-    }
+      type: "umd",
+    },
   },
   plugins: [
     new ModuleFederationPlugin({
       library: { type: "umd" },
       remotes: {
-        my_widget_remote: "my_widget_remote",
+        "my-widget": "my_widget_remote",
       },
       shared: {
         react: { eager: true },
@@ -35,4 +34,7 @@ module.exports = {
       },
     }),
   ],
+  resolve: {
+    extensions: [".js", ".jsx", ".json", ".ts", ".tsx", ".wasm"],
+  },
 };
