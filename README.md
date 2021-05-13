@@ -2,6 +2,8 @@
 
 This repository shows 3 different approaches to create re-usable UI widgets using [webpack 5](https://webpack.js.org/concepts/).
 
+To view the examples in TypeScript, view the [typescript branch](https://github.com/marcogrcr/reusable-ui-widgets-with-webpack-5-example/tree/typescript).
+
 In this pattern, a host app renders a widget (i.e. an independent piece of UI) one or more times in a page. The widget can in turn be re-used in other host apps. An example of a widget can be a "share on social media" button for sharing a page.
 
 This example consists of a very simple widget that displays the text `"Hello from Widget."` for demonstration purposes.
